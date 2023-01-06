@@ -20,6 +20,21 @@ public class ProjectConfig {
     @Autowired
     private AuthenticationProvider authenticationProvider;
 
+    @Bean
+    public UserDetailsService userDetailsService(){
+        var uds = new InMemoryUserDetailsManager();
+        var user1 = User.withUsername("john")
+                .password("12345")
+                .authorities("write")
+                .build();
+        uds.createUser(user1);
+        return uds;
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return NoOpPasswordEncoder.getInstance();
+    }
 
     @Bean
     public AuthenticationManager authManager(HttpSecurity http) throws Throwable {

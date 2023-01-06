@@ -16,20 +16,6 @@ public class AuthenProviderApplication {
         SpringApplication.run(AuthenProviderApplication.class, args);
     }
 
-    @Bean
-    public UserDetailsService userDetailsService(){
-        var uds = new InMemoryUserDetailsManager();
-        var user1 = User.withUsername("john")
-                .password("12345")
-                .authorities("write")
-                .build();
-        uds.createUser(user1);
-        return uds;
-    }
 
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return NoOpPasswordEncoder.getInstance();
-    }
 
 }
